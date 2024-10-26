@@ -1,15 +1,13 @@
-function [imageResult] = saltPepperReduction(image, mode, maskSize, q)
+function [imageResult, noise] = saltPepperReduction(image, mode, maskSize, q)
     imageResult = double(image);
-    noise = imnoise(image, "salt & pepper", 0.02);
-    figure; imshow(noise);
-    noise = double(noise);
+    noise = double(imnoise(image, "salt & pepper", 0.02));
     [iImage, jImage, kImage] = size(noise);
     skip = floor(maskSize / 2);
     
     for k=1:kImage
         for i=1+skip:iImage-skip
             for j=1+skip:jImage-skip
-                value = double(noise(i-skip:i+skip, j-skip:j+skip, k));
+                value = noise(i-skip:i+skip, j-skip:j+skip, k);
                 switch mode
                     case "min"
                         value = min(value(:));
@@ -41,4 +39,5 @@ function [imageResult] = saltPepperReduction(image, mode, maskSize, q)
     for k=1:kImage
         imageResult(:,:,k) = imageResult(:,:,k) / max(imageResult(:,:,k), [], "all");
     end
+    noise = uint8(noise);
 end
