@@ -6,7 +6,7 @@ function [imageSmoothed] = spatialSmoothing(image, filterSize, mode)
         sigma = 1; % fixed value
         [x, y] = meshgrid(-(m-1)/2:(m-1)/2, -(n-1)/2:(n-1)/2);
         g = exp(-(x.^2+y.^2) / (2*sigma^2));
-        mask = g ./ sum(g(:));
+        mask = g ./ sum(g(:)); % mask = fspecial('gaussian',hsize,sigma)
         imageSmoothed = convolution(image, mask);
     end
 end
