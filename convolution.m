@@ -11,7 +11,7 @@ function [imageConv] = convolution(image, mask)
             for j=1+skip:jImage-skip
                 value = double(image(i-skip:i+skip, j-skip:j+skip, k)).*mask;
                 value = sum(value, "all");
-                imageConv(i,j,k) = double(uint8(value));
+                imageConv(i,j,k) = max(value, 0); % clipped to 0
             end
         end
     end

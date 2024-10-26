@@ -1,8 +1,8 @@
 image = imread("images\grayscale\ferris-wheel.jpg");
 imageRgb = imread("images\rgb\forest.jpg");
 
-imageModified = brighteningFrequency(image, 2, 10);
-imageRgbModified = brighteningFrequency(imageRgb, 2, 10);
+imageModified = saltPepperReduction(image, "alphaTrimmedMean", 3, 4);
+imageRgbModified = saltPepperReduction(imageRgb, "median", 3);
 
 figure; imshow(image);
 figure; imshow(imageModified);
