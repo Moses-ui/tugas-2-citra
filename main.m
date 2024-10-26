@@ -1,8 +1,8 @@
 image = imread("images\grayscale\ferris-wheel.jpg");
 imageRgb = imread("images\rgb\forest.jpg");
 
-imageModified = lowpassFilter(image, 50, "glpf", true);
-imageRgbModified = lowpassFilter(imageRgb, 50, "blpf", true);
+imageModified = brighteningFrequency(image, 2, 10);
+imageRgbModified = brighteningFrequency(imageRgb, 2, 10);
 
 figure; imshow(image);
 figure; imshow(imageModified);
